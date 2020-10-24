@@ -30,10 +30,13 @@ def main(args):
         transforms.ToTensor()
     ])
 
-    trainset = torchvision.datasets.GPRDataset(root='data', train=True, download=False, transform=transform_train)
+    img_file = list(os.listdir('/Users/test/Desktop/Master_Thesis_Flow/real-nvp/data/GPR_Data/B12/B12_Pictures_LS'))
+    print(type(img_file))
+    
+    trainset = GPRDataset(img_file, root_dir='data/GPR_Data/B12/B12_Pictures_LS', train=True, transform=transform_train)
     trainloader = data.DataLoader(trainset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
 
-    testset = torchvision.datasets.GPRDataset(root='data', train=False, download=False, transform=transform_test)
+    testset = GPRDataset(img_file, root_dir='data/GPR_Data/B12/B12_Pictures_LS', train=False, transform=transform_test)
     testloader = data.DataLoader(testset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
 
     # Model
